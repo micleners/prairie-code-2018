@@ -1,0 +1,103 @@
+<p>person works!</p>
+<p>{{ test }}</p>
+<input type="text" [(ngModel)]="name" />
+{{ name }}
+
+<input (ngModelChange)="consoleLog($event)" type="text" [(ngModel)]="apples" />
+{{ apples }}
+
+<div>Click to check: <input type="checkbox" [(ngModel)]="isChecked" /></div>
+
+<div>Am I checked?: {{ isChecked ? 'I am' : 'No, I am not' }}</div>
+
+<div>
+  <div>
+    Attribute Example:
+    <div [attr.align]="isChecked ? 'center' : 'left'">
+      Am I centered?
+    </div>
+  </div>
+  <div>
+    Style Example:
+    <div [style.color]="isChecked ? 'red' : 'black'">
+      I am red
+    </div>
+  </div>
+  <div>
+    Style Example:
+    <div [class.custom-highlight]="isChecked">
+      I might be :)
+    </div>
+  </div>
+</div>
+
+<h2>Event Binding</h2>
+<div>
+  <div>What did you last click? {{ lastAction }}</div>
+  <div (click)="clickMe($event)">Click me</div>
+  <button (click)="buttonClicked()" [disabled]="!isChecked">Click it</button>
+</div>
+
+<div>
+  <div>
+    {{ inputEvent }}
+  </div>
+  <div>
+    Event Sample:
+    <input
+      type="text"
+      (blur)="inputEvent = 'blur'"
+      (keyup.enter)="inputEvent = 'enter'"
+    />
+  </div>
+</div>
+
+<h1>Angular Directives</h1>
+<h2>ngIf</h2>
+<div>
+  Show Content <input type="checkBox" [(ngModel)]="showElements" />
+  <div *ngIf="showElements">
+    Content 1
+  </div>
+  <div [hidden]="!showElements">
+    Content 2
+  </div>
+  <div *ngIf="!showElements">
+    Content 3
+  </div>
+</div>
+<h2>ngFor</h2>
+<div>
+  <h3>Basic List of States</h3>
+  <ul>
+    <li *ngFor="let state of states">{{ state }}</li>
+  </ul>
+  <h3>Uppercase List of States</h3>
+  <ul>
+    <li *ngFor="let state of states">{{ state | uppercase }}</li>
+  </ul>
+  <h3>Selectable List of States</h3>
+  <ul>
+    <li
+      *ngFor="let state of states"
+      (click)="selectedState = state"
+      [class.selectedState]="selectedState === state"
+    >
+      {{ state }}
+    </li>
+    <li>{{ selectedState }}</li>
+  </ul>
+  Add State: <input #newState (keyup.enter)="addState(newState.value); newState.value=''" (blue)="addState(newState.value); newState.value=''"/>
+  <button (click)="addState(newState.value); newState.value=''">Add</button>
+</div>
+
+<h2>ngSwitch</h2>
+<div>
+  Pick a number between 1 and 3: <input type="number" [(ngModel)]="chosenNumber"/>
+  <div [ngSwitch]="chosenNumber">
+    <div *ngSwitchCase="1">You chose 1</div>
+    <div *ngSwitchCase="2">You chose 2</div>
+    <div *ngSwitchCase="3">You chose 3</div>
+    <div *ngSwitchDefault>Default number</div>
+  </div>
+</div>
